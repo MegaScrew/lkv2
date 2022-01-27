@@ -221,6 +221,7 @@ export default createStore({
         shipments.forEach(element => {
           state.shipments1_group.push({ date: element})
         });
+        f
         // state.shipments1_group.push({ Id: shipments[index].id })
       }
     },
