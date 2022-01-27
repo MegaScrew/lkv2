@@ -46,6 +46,8 @@ export default createStore({
     ],
     shipments2: [
     ],
+    shipments1_group: [
+    ],
     certificate: [
     ],
     contract: [
@@ -213,12 +215,22 @@ export default createStore({
         state.shipments2.push({ Id: shipments[index].id, Date: shipments[index].date, Nomenclature: shipments[index].name_of_numenclature, Weight: shipments[index].shipped_with_adjustments })
       }
     },
+    SET_SHIPMENTS1_GROUP: (state, shipments) => {
+      state.shipments1_group.splice(0)
+      for (let index = 0; index < shipments.length; index++) {
+        shipments.forEach(element => {
+          state.shipments1_group.push({ date: element})
+        });
+        // state.shipments1_group.push({ Id: shipments[index].id })
+      }
+    },
     CLEAR_ATTORNEY: (state) => {
       state.attorney.splice(0)
     },
     CLEAR_SHIPMENTS: (state) => {
       state.shipments1.splice(0)
       state.shipments2.splice(0)
+      state.shipments1_group.splice(0)
     },
     SET_CERTIFICATE: (state, certificate) => {
       state.certificate.splice(0)
@@ -325,6 +337,7 @@ export default createStore({
         .then((response) => {
           commit('SET_SHIPMENTS1', response.data.shipments1)
           commit('SET_SHIPMENTS2', response.data.shipments2)
+          commit('SET_SHIPMENTS1_GROUP', response.data.shipments1_group)
           // console.log(response.data)
         })
         .catch((error) => {
